@@ -1,0 +1,1 @@
+import ReactFlagsSelect from 'react-flags-select';
