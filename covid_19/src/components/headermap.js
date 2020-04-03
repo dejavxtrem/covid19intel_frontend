@@ -8,13 +8,10 @@ import AmChartMap from './amchart/amchart';
 class MapContainer extends React.Component {
     render () {
         return (
-        <Container fluid>
-          <Row>
-            <Col>
-            <AmChartMap/>
-            </Col>
-          </Row>
-        </Container>
+          <div>
+            <h1>COVID-INTEL</h1>
+          </div>
+            
 
         )
     }

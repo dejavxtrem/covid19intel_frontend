@@ -68,7 +68,7 @@ class AmChartMap extends React.Component {
   
       return (
         <div>
-          <div id="chartdiv" style={{ width: "100%", height: "500px" }}></div>
+          <div id="chartdiv" ></div>
         </div>
       );
     }

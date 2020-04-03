@@ -1,8 +1,13 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 import MapContainer from './components/headermap';
-
+import DropDown from  './components/dropdown/dropdown';
+import TableComponent from './components/table/table'
+import AmChartMap from  './components/amchart/amchart';
 let apiKEY = process.env.REACT_APP_GOOGLE_API_KEY
 
 // if (process.env.NODE_ENV === 'development') {
@@ -42,8 +47,38 @@ componentDidMount() {
 
   render() {
   return (
+
     <div className="App">
-      <MapContainer/>
+
+        <Container >
+            {/* Mapcontainer component on col */}
+            <Row>
+              <Col>
+              <MapContainer/>
+              </Col>
+            </Row>
+          {/* amchart component on col */}
+            <Row>
+              <Col>
+              <AmChartMap/>
+              </Col>
+            </Row>
+          {/* dropdown component on col */}
+            <Row>
+              <Col>
+              <DropDown/>
+              </Col>
+            </Row>
+          {/* table component on col */}
+            <Row>
+              <Col>
+              <TableComponent/>
+              </Col>
+            </Row>
+        </Container>
+     
+      
+      
     </div>
   );
 }

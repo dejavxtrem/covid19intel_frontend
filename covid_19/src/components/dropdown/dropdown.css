@@ -1,0 +1,18 @@
+
+
+.dropdown {
+    border-style: solid;
+    height: 8rem;
+    
+}
+
+.coldrop {
+    display:flex;
+    justify-content: center;
+    margin-bottom: 1.88rem;
+    margin-top: 3rem;
+    
+}
+.menu-flags {
+    font-weight: 100;
+}
