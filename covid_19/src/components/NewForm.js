@@ -28,7 +28,9 @@ class NewForm extends React.Component {
           .then (resJson => {
             this.props.handleAddRequest(resJson)
             this.setState({
-              requests: ''
+              name: '',
+              comments: '',
+              location: ''
             })
         }).catch (error => console.error({'Error': error}))
       }

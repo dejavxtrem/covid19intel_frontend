@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import NewForm from './components/NewForm.js'
+import Show from './components/Show.js'
 
 // .env BaseURL for React
 let baseURL = process.env.REACT_APP_BASEURL
@@ -20,8 +21,6 @@ fetch(baseURL+ '/covidstats')
     err => console.log(err))
   .then(parsedData => console.log(parsedData),
    err => console.log(err))
-
-
 
 class App extends React.Component {
 
@@ -44,6 +43,12 @@ class App extends React.Component {
          err=> console.log(err))
   }
 
+//for show route
+getRequest = (request) => {
+  this.setState({request})
+}
+
+
  // New Form HandleAdd 
   handleAddRequest = (requests) => {
     const copyRequest = [...this.state.requests]
@@ -56,22 +61,17 @@ class App extends React.Component {
     })
   }
 
-  // handleSubmit = (event) => {
-  //   event.preventDefault()
-  //   fetch(this.props.baseURL + '/covidstats', {
-  //     method: 'POST',
-  //     body: JSON.stringify({requests: this.state.requests}),
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     }
-  //   }).then (res => res.json())
-  //     .then (resJson => {
-  //       this.props.handleAddRequest(resJson)
-  //       this.setState({
-  //         requests: ''
-  //       })
-  //   }).catch (error => console.error({'Error': error}))
-  // }
+    //function to delete a request and return all the others
+    deleteRequest = (id) => {
+      fetch(baseURL + '/covidstats/' + id, {
+        method: 'DELETE'
+      }).then ( res => {
+        const requestsArr = this.state.requests.filter( request => {
+          return request._id !== id
+        })
+        this.setState({requests: requestsArr})
+      })
+    }
 
   render() {
     console.log(this.state.requests)
@@ -82,6 +82,29 @@ class App extends React.Component {
       <h1 className="comment-title">Post any comments or requests in your area</h1>
       <NewForm baseURL={baseURL}
   handleAddRequest={this.handleAddRequest}/>
+
+  {/* this is where the requests will display */}
+  <br/>
+  
+  <table>
+  <tbody>
+  <tr>
+        <td>Name:</td> 
+        <td>Comment/request:</td>
+        <td>Location:</td>
+       </tr> 
+    {this.state.requests.map(request => (
+       <tr key={request._id}
+       onMouseOver={() => this.getRequest(request)}>
+        <td>{request.name}</td>
+        <td>{request.comments}</td>
+        <td>{request.location}</td>
+        <button onClick={() => this.deleteRequest(request._id)}>Delete</button>
+        </tr>
+    ))}
+  </tbody>
+</table>
+{this.state.request ? <Show request={this.state.request}/> : null}
     </div>
   );
 }
