@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import NewForm from './components/NewForm.js'
+import Show from './components/Show.js'
 
 // .env BaseURL for React
 let baseURL = process.env.REACT_APP_BASEURL
@@ -41,6 +42,12 @@ class App extends React.Component {
         }),
          err=> console.log(err))
   }
+
+//for show route
+getRequest = (request) => {
+  this.setState({request})
+}
+
 
  // New Form HandleAdd 
   handleAddRequest = (requests) => {
@@ -87,7 +94,8 @@ class App extends React.Component {
         <td>Location:</td>
        </tr> 
     {this.state.requests.map(request => (
-       <tr>
+       <tr key={request._id}
+       onMouseOver={() => this.getRequest(request)}>
         <td>{request.name}</td>
         <td>{request.comments}</td>
         <td>{request.location}</td>
@@ -96,7 +104,7 @@ class App extends React.Component {
     ))}
   </tbody>
 </table>
-
+{this.state.request ? <Show request={this.state.request}/> : null}
     </div>
   );
 }
