@@ -11,6 +11,7 @@ import AmChartMap from  './components/amchart/amchart';
 //Comment imports
 import NewForm from './components/NewForm.js'
 import Show from './components/Show.js'
+import UpdateModal from './components/UpdateForm'
 let apiKEY = '39f4998951msh07883f04b2178e7p1b36dbjsnbf1a0ddc7ca0'
 
 // if (process.env.NODE_ENV === 'development') {
@@ -68,8 +69,13 @@ class CommentRequest extends React.Component {
   
   //for show route
   getRequest = (request) => {
-    this.setState({request})
+    this.setState({request, getRequestActive: true, getEditRequestActive: false}) 
   }
+
+    //for edit route
+    getEditRequest = (request) => {
+      this.setState({request, getRequestActive: false, getEditRequestActive: true})
+    }
   
   
    // New Form HandleAdd 
@@ -82,6 +88,10 @@ class CommentRequest extends React.Component {
         comments: '',
         location: '',
       })
+    }
+
+    handleEditRequest = (request) => {
+      console.log(request)
     }
   
       //function to delete a request and return all the others
@@ -97,7 +107,7 @@ class CommentRequest extends React.Component {
       }
   
     render() {
-      console.log(this.state.requests)
+      
     return (
   
       // Comments/Requests
@@ -117,17 +127,21 @@ class CommentRequest extends React.Component {
           <td>Location:</td>
          </tr> 
       {this.state.requests.map(request => (
-         <tr key={request._id}
-         onMouseOver={() => this.getRequest(request)}>
-          <td>{request.name}</td>
+         <tr key={request._id}>
+          <td onMouseOver={() => this.getRequest(request)}>{request.name}</td>
           <td>{request.comments}</td>
           <td>{request.location}</td>
           <td className="delete"><button onClick={() => this.deleteRequest(request._id)}>Delete</button></td>
+          <td className="edit"><button onClick={() => {this.getEditRequest(request)} }>Edit</button></td>
           </tr>
       ))}
     </tbody>
   </table>
-  {this.state.request ? <Show request={this.state.request}/> : null}
+  {this.state.getRequestActive ? <Show request={this.state.request}/> : null}
+  <br/>
+  <br/>
+  
+  {this.state.getEditRequestActive ? <UpdateModal baseURL={baseURL}request={this.state.request} handleEditRequest={this.handleEditRequest}/>: null}
       </div>
     );
   }
@@ -139,7 +153,7 @@ class App extends React.Component {
 
   state = {
 
-    covidData: {}
+    covidData: {countries_stat: ['test', '']}
   }
 
 //compDidmount method

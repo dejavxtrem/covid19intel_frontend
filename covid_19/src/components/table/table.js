@@ -15,7 +15,7 @@ class TableComponent extends React.Component {
     //   }
 
     render () {
-    console.log(this.props.covidApiData.countries_stat)
+    console.log(this.props.covidApiData.countries_stat[0])
        
         return (
             <Table striped bordered hover responsive="lg">
@@ -29,16 +29,16 @@ class TableComponent extends React.Component {
             </thead>
                 <tbody>
                     <tr>
-                    {/* <td>{this.getData()}</td> */}
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
+                    <td>{this.props.covidApiData.countries_stat[0].country_name}</td>
+                    <td>{this.props.covidApiData.countries_stat[0].cases}</td>
+                    <td>{this.props.covidApiData.countries_stat[0].deaths}</td>
+                    <td>{this.props.covidApiData.countries_stat[0].total_recovered}</td>
                     </tr>
                     <tr>
-                    <td>2</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
+                    <td>{this.props.covidApiData.countries_stat[1].country_name}</td>
+                    <td>{this.props.covidApiData.countries_stat[1].cases}</td>
+                    <td>{this.props.covidApiData.countries_stat[1].deaths}</td>
+                    <td>{this.props.covidApiData.countries_stat[1].total_recovered}</td>
                     </tr>
                     <tr>
                     <td>3</td>
