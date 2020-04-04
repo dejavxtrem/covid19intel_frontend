@@ -1,3 +1,7 @@
+
+.amchart {
+  border-style: solid;
+
 .App {
   text-align: center;
 }
@@ -53,4 +57,5 @@ td {
   z-index: 1;
   padding: 1em 1em 0;
   border-radius: 10px  0 0 10px ;
+
 }

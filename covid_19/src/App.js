@@ -1,5 +1,25 @@
 import React from 'react';
 import './App.css';
+//Dejay imports
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import MapContainer from './components/headermap';
+import DropDown from  './components/dropdown/dropdown';
+import TableComponent from './components/table/table'
+import AmChartMap from  './components/amchart/amchart';
+let apiKEY = process.env.REACT_APP_GOOGLE_API_KEY
+
+// if (process.env.NODE_ENV === 'development') {
+//   baseURL = 'http://localhost:3003'
+// } else {
+//   baseURL = 'https://fathomless-sierra-68956.herokuapp.com'
+// }
+
+
+
+//console.log(apiKEY)
+//Comment imports
 import NewForm from './components/NewForm.js'
 import Show from './components/Show.js'
 
@@ -22,89 +42,161 @@ fetch(baseURL+ '/covidstats')
   .then(parsedData => console.log(parsedData),
    err => console.log(err))
 
+
+//comment component - to be moved to separate file later
+class CommentRequest extends React.Component {
+
+    state = {
+      requests: []
+    }
+  
+    componentDidMount() {
+      this.getComments()
+    }
+  
+    getComments = () => {
+      fetch(baseURL+ '/covidstats')
+        .then(data => {
+          return data.json()},
+          err => console.log(err))
+          .then(parsedData => this.setState({
+            requests: parsedData
+          }),
+           err=> console.log(err))
+    }
+  
+  //for show route
+  getRequest = (request) => {
+    this.setState({request})
+  }
+  
+  
+   // New Form HandleAdd 
+    handleAddRequest = (requests) => {
+      const copyRequest = [...this.state.requests]
+      copyRequest.unshift(requests)
+      this.setState({
+        requests: copyRequest,
+        name: '',
+        comments: '',
+        location: '',
+      })
+    }
+  
+      //function to delete a request and return all the others
+      deleteRequest = (id) => {
+        fetch(baseURL + '/covidstats/' + id, {
+          method: 'DELETE'
+        }).then ( res => {
+          const requestsArr = this.state.requests.filter( request => {
+            return request._id !== id
+          })
+          this.setState({requests: requestsArr})
+        })
+      }
+  
+    render() {
+      console.log(this.state.requests)
+    return (
+  
+      // Comments/Requests
+      <div className="commentsContainer">
+        <h1 className="comment-title">Post any comments or requests in your area</h1>
+        <NewForm baseURL={baseURL}
+    handleAddRequest={this.handleAddRequest}/>
+  
+    {/* this is where the requests will display */}
+    <br/>
+    
+    <table>
+    <tbody>
+    <tr>
+          <td>Name:</td> 
+          <td>Comment/request:</td>
+          <td>Location:</td>
+         </tr> 
+      {this.state.requests.map(request => (
+         <tr key={request._id}
+         onMouseOver={() => this.getRequest(request)}>
+          <td>{request.name}</td>
+          <td>{request.comments}</td>
+          <td>{request.location}</td>
+          <td><button onClick={() => this.deleteRequest(request._id)}>Delete</button></td>
+          </tr>
+      ))}
+    </tbody>
+  </table>
+  {this.state.request ? <Show request={this.state.request}/> : null}
+      </div>
+    );
+  }
+  }
+
+  
+  //Dejay app component
 class App extends React.Component {
 
   state = {
-    requests: []
+
+    covidData: []
   }
 
-  componentDidMount() {
-    this.getComments()
-  }
-
-  getComments = () => {
-    fetch(baseURL+ '/covidstats')
-      .then(data => {
-        return data.json()},
-        err => console.log(err))
-        .then(parsedData => this.setState({
-          requests: parsedData
-        }),
-         err=> console.log(err))
-  }
-
-//for show route
-getRequest = (request) => {
-  this.setState({request})
+//compDidmount method
+componentDidMount() {
+  this.getCovidStats();
 }
 
+//make fetch request to get data from api
+ getCovidStats = () => {
+   fetch('https://coronavirus-monitor.p.rapidapi.com/coronavirus/affected.php?', {
+     "method": "GET",
+     headers: {
+      'x-rapidapi-host': 'coronavirus-monitor.p.rapidapi.com',
+      'x-rapidapi-key': `${apiKEY}`
 
- // New Form HandleAdd 
-  handleAddRequest = (requests) => {
-    const copyRequest = [...this.state.requests]
-    copyRequest.unshift(requests)
-    this.setState({
-      requests: copyRequest,
-      name: '',
-      comments: '',
-      location: '',
-    })
-  }
-
-    //function to delete a request and return all the others
-    deleteRequest = (id) => {
-      fetch(baseURL + '/covidstats/' + id, {
-        method: 'DELETE'
-      }).then ( res => {
-        const requestsArr = this.state.requests.filter( request => {
-          return request._id !== id
-        })
-        this.setState({requests: requestsArr})
-      })
-    }
+     }
+   }).then(data => data.json(), err => console.log(err))
+     .then(parsedData => this.setState({covidstats: parsedData}), err => console.log('parsedData', err))
+ }
 
   render() {
     console.log(this.state.requests)
   return (
 
-    // Comments/Requests
-    <div className="commentsContainer">
-      <h1 className="comment-title">Post any comments or requests in your area</h1>
-      <NewForm baseURL={baseURL}
-  handleAddRequest={this.handleAddRequest}/>
+ {/* Dejay skelaton */}
+    <div className="App">
 
-  {/* this is where the requests will display */}
-  <br/>
-  
-  <table>
-  <tbody>
-  <tr>
-        <td>Name:</td> 
-        <td>Comment/request:</td>
-        <td>Location:</td>
-       </tr> 
-    {this.state.requests.map(request => (
-       <tr key={request._id}
-       onMouseOver={() => this.getRequest(request)}>
-        <td>{request.name}</td>
-        <td>{request.comments}</td>
-        <td>{request.location}</td>
-        <button onClick={() => this.deleteRequest(request._id)}>Delete</button>
-        </tr>
-    ))}
-  </tbody>
-</table>
-{this.state.request ? <Show request={this.state.request}/> : null}
+        <Container >
+            {/* Mapcontainer component on col */}
+            <Row>
+              <Col>
+              <MapContainer/>
+              </Col>
+            </Row>
+          {/* amchart component on col */}
+            <Row>
+              <Col>
+              <AmChartMap/>
+              </Col>
+            </Row>
+          {/* dropdown component on col */}
+            <Row>
+              <Col>
+              <DropDown/>
+              </Col>
+            </Row>
+          {/* table component on col */}
+            <Row>
+              <Col>
+              <TableComponent/>
+              </Col>
+            </Row>
+             <Row>
+              <Col>
+              <CommentRequest/>
+              </Col>
+            </Row>
+        </Container>
     </div>
   );
 }
