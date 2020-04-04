@@ -8,7 +8,10 @@ import MapContainer from './components/headermap';
 import DropDown from  './components/dropdown/dropdown';
 import TableComponent from './components/table/table'
 import AmChartMap from  './components/amchart/amchart';
-let apiKEY = process.env.REACT_APP_GOOGLE_API_KEY
+//Comment imports
+import NewForm from './components/NewForm.js'
+import Show from './components/Show.js'
+let apiKEY = '39f4998951msh07883f04b2178e7p1b36dbjsnbf1a0ddc7ca0'
 
 // if (process.env.NODE_ENV === 'development') {
 //   baseURL = 'http://localhost:3003'
@@ -19,9 +22,7 @@ let apiKEY = process.env.REACT_APP_GOOGLE_API_KEY
 
 
 //console.log(apiKEY)
-//Comment imports
-import NewForm from './components/NewForm.js'
-import Show from './components/Show.js'
+
 
 // .env BaseURL for React
 let baseURL = process.env.REACT_APP_BASEURL
@@ -121,7 +122,7 @@ class CommentRequest extends React.Component {
           <td>{request.name}</td>
           <td>{request.comments}</td>
           <td>{request.location}</td>
-          <td><button onClick={() => this.deleteRequest(request._id)}>Delete</button></td>
+          <td className="delete"><button onClick={() => this.deleteRequest(request._id)}>Delete</button></td>
           </tr>
       ))}
     </tbody>
@@ -138,7 +139,7 @@ class App extends React.Component {
 
   state = {
 
-    covidData: []
+    covidData: {}
   }
 
 //compDidmount method
@@ -148,7 +149,7 @@ componentDidMount() {
 
 //make fetch request to get data from api
  getCovidStats = () => {
-   fetch('https://coronavirus-monitor.p.rapidapi.com/coronavirus/affected.php?', {
+   fetch('https://coronavirus-monitor.p.rapidapi.com/coronavirus/cases_by_country.php', {
      "method": "GET",
      headers: {
       'x-rapidapi-host': 'coronavirus-monitor.p.rapidapi.com',
@@ -156,15 +157,15 @@ componentDidMount() {
 
      }
    }).then(data => data.json(), err => console.log(err))
-     .then(parsedData => this.setState({covidstats: parsedData}), err => console.log('parsedData', err))
+     .then(parsedData => this.setState({covidData: parsedData}), err => console.log('parsedData', err))
  }
 
   render() {
     console.log(this.state.requests)
   return (
-
- {/* Dejay skelaton */}
+ 
     <div className="App">
+      {/* Dejay skelaton */}
 
         <Container >
             {/* Mapcontainer component on col */}
@@ -188,7 +189,7 @@ componentDidMount() {
           {/* table component on col */}
             <Row>
               <Col>
-              <TableComponent/>
+              <TableComponent covidApiData={this.state.covidData}/>
               </Col>
             </Row>
              <Row>
@@ -197,10 +198,11 @@ componentDidMount() {
               </Col>
             </Row>
         </Container>
+
     </div>
   );
 }
 }
 
 
-export default App;
+export default App

@@ -7,20 +7,29 @@ import Table from 'react-bootstrap/Table'
 
 
 class TableComponent extends React.Component {
+
+    // getData = () => {
+    //     this.props.covidApiData.countries_stat.map(country => {
+    //       return country.country_name
+    //     })
+    //   }
+
     render () {
+    console.log(this.props.covidApiData.countries_stat)
+       
         return (
             <Table striped bordered hover responsive="lg">
             <thead>
             <tr>
-                        <th>#</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Username</th>
+                        <th>Country</th>
+                        <th>Total Cases</th>
+                        <th># of deaths</th>
+                        <th># recovered</th>
             </tr>   
             </thead>
                 <tbody>
                     <tr>
-                    <td>1</td>
+                    {/* <td>{this.getData()}</td> */}
                     <td>Mark</td>
                     <td>Otto</td>
                     <td>@mdo</td>
