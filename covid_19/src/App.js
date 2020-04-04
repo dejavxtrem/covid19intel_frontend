@@ -99,7 +99,7 @@ getRequest = (request) => {
         <td>{request.name}</td>
         <td>{request.comments}</td>
         <td>{request.location}</td>
-        <button onClick={() => this.deleteRequest(request._id)}>Delete</button>
+        <td className="delete"><button onClick={() => this.deleteRequest(request._id)}>Delete</button></td>
         </tr>
     ))}
   </tbody>
@@ -111,4 +111,4 @@ getRequest = (request) => {
 }
 
 
-export default App;
+export default App
