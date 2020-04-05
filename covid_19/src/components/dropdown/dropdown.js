@@ -8,53 +8,52 @@ import Col from 'react-bootstrap/Col'
 //drop down countries imports
 import countryFinder from './dropdowncountries';
 
-let apiKEY = '39f4998951msh07883f04b2178e7p1b36dbjsnbf1a0ddc7ca0'
-
 
 class DropDown extends React.Component {
 
-  state = {
-    covidSearch: {countries_stats: []}
+// componentDidMount() {
+//  this.covidFunction()
+// }
 
-  }
 
-  componentDidMount() {
-    this.getCountry();
-    this.onSelectFlag();
-  }
-
-  //API call to get search data
-  getCountry = () => {
-    fetch(`https://coronavirus-monitor.p.rapidapi.com/coronavirus/cases_by_country.php`, {
-      "method": "GET",
-      headers: {
-       'x-rapidapi-host': 'coronavirus-monitor.p.rapidapi.com',
-       'x-rapidapi-key': `${apiKEY}`
+//function to check if the dropdown country string matches the country name in the api data
+finderCountry = (valueFinder) => {
+  this.props.covidData.countries_stat.some(countryFind => {
+     if (countryFind.country_name === valueFinder) {
+        console.log(countryFind)
+     }
+  })
+}
+  
+  
+  
+  
  
-      }
-    }).then(data => data.json(), err => console.log(err))
-      .then(parsedData => this.setState({covidSearch: parsedData}), err => console.log('parsedData', err))
-  }
 
 
-  //Convert DropDown country abriv to search country string
+  //Convert DropDown country abbreviation to search country string
   onSelectFlag = (country) => {
+      let valueFinder;
       for (let [key, value] of Object.entries(countryFinder)) {
          if (country === key) {
            console.log(`${value}`)
+           valueFinder = value
          }
       }
-      
+    //pass down the country string to the API props data to compare country name
+      this.finderCountry(valueFinder)
   }
 
     render () {
+     
 
-      console.log(this.state.covidSearch)
+    //console.log(this.finderCounry())
         return (
             <Container className="dropdown">
             {/* dropdown component on col */}
             <Row>
               <Col className="coldrop">
+               
               <ReactFlagsSelect  className="menu-flags" onSelect={this.onSelectFlag}/>
               </Col>
             </Row>

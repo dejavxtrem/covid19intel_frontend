@@ -138,8 +138,8 @@ let baseURL = process.env.REACT_APP_BASEURL
 class App extends React.Component {
 
   state = {
-
-    covidData: {countries_stat:['test', '', '', '', '', '', '', '', '','']}
+    //create a placeholder for 208 array of objects
+    covidData: {countries_stat:[...Array(208).fill({...Object})]}
   }
 
 //compDidmount method
@@ -183,7 +183,7 @@ componentDidMount() {
           {/* dropdown component on col */}
             <Row>
               <Col>
-              <DropDown/>
+              <DropDown covidData={this.state.covidData}/>
               </Col>
             </Row>
           {/* table component on col */}
