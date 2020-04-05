@@ -25,7 +25,7 @@ let apiKEY = '39f4998951msh07883f04b2178e7p1b36dbjsnbf1a0ddc7ca0'
 
 
 // .env BaseURL for React
-let baseURL = process.env.REACT_APP_BASEURL
+// let baseURL = process.env.REACT_APP_BASEURL
 
 
 // if (process.env.NODE_ENV === 'development') {
@@ -161,7 +161,7 @@ componentDidMount() {
  }
 
   render() {
-    console.log(this.state.requests)
+    
   return (
  
     <div className="App">

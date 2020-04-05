@@ -7,14 +7,35 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 //drop down countries imports
 import countryFinder from './dropdowncountries';
+import CountryModal from '../modal/countrymodal'
+import Button from 'react-bootstrap/Button';
+
+
+
+
+
+
+
+
+
+
+
 
 
 class DropDown extends React.Component {
 
-// componentDidMount() {
-//  this.covidFunction()
-// }
+ state = {
+   show: false,
+   setShow: false
+ }
+ 
+  handleShow = () => {
+    this.setState({show: true});
+  }
 
+handleClose = () => {
+  this.setState({show: false})
+}
 
 //function to check if the dropdown country string matches the country name in the api data
 finderCountry = (valueFinder) => {
@@ -25,13 +46,7 @@ finderCountry = (valueFinder) => {
   })
 }
   
-  
-  
-  
- 
-
-
-  //Convert DropDown country abbreviation to search country string
+//Convert DropDown country abbreviation to search country string
   onSelectFlag = (country) => {
       let valueFinder;
       for (let [key, value] of Object.entries(countryFinder)) {
@@ -44,9 +59,11 @@ finderCountry = (valueFinder) => {
       this.finderCountry(valueFinder)
   }
 
-    render () {
-     
+    
 
+
+    render () {
+  
     //console.log(this.finderCounry())
         return (
             <Container className="dropdown">
@@ -55,6 +72,8 @@ finderCountry = (valueFinder) => {
               <Col className="coldrop">
                
               <ReactFlagsSelect  className="menu-flags" onSelect={this.onSelectFlag}/>
+              <Button variant="primary" onClick={this.handleShow}>GO</Button>
+              <CountryModal showUp={this.state.show}  hideModal={this.handleClose}/>
               </Col>
             </Row>
           </Container>
