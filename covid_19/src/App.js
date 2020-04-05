@@ -22,7 +22,7 @@ let apiKEY = '39f4998951msh07883f04b2178e7p1b36dbjsnbf1a0ddc7ca0'
 
 
 
-//console.log(apiKEY)
+console.log(apiKEY)
 
 
 // .env BaseURL for React
@@ -121,7 +121,7 @@ class CommentRequest extends React.Component {
     
     <table>
     <tbody>
-    <tr>
+        <tr>
           <td>Name:</td> 
           <td>Comment/request:</td>
           <td>Location:</td>
@@ -152,8 +152,8 @@ class CommentRequest extends React.Component {
 class App extends React.Component {
 
   state = {
-
-    covidData: {countries_stat: ['test', '']}
+    //create a placeholder for 208 array of objects
+    covidData: {countries_stat:[...Array(208).fill({...Object})]}
   }
 
 //compDidmount method
@@ -175,7 +175,7 @@ componentDidMount() {
  }
 
   render() {
-    console.log(this.state.requests)
+    
   return (
  
     <div className="App">
@@ -197,7 +197,7 @@ componentDidMount() {
           {/* dropdown component on col */}
             <Row>
               <Col>
-              <DropDown/>
+              <DropDown covidData={this.state.covidData}/>
               </Col>
             </Row>
           {/* table component on col */}
@@ -209,6 +209,7 @@ componentDidMount() {
              <Row>
               <Col>
               <CommentRequest/>
+              
               </Col>
             </Row>
         </Container>

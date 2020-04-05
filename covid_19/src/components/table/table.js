@@ -41,56 +41,56 @@ class TableComponent extends React.Component {
                     <td>{this.props.covidApiData.countries_stat[1].total_recovered}</td>
                     </tr>
                     <tr>
-                    <td>3</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
+                    <td>{this.props.covidApiData.countries_stat[2].country_name}</td>
+                    <td>{this.props.covidApiData.countries_stat[2].cases}</td>
+                    <td>{this.props.covidApiData.countries_stat[2].deaths}</td>
+                    <td>{this.props.covidApiData.countries_stat[2].total_recovered}</td>
                     </tr>
                     <tr>
-                    <td>4</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
+                    <td>{this.props.covidApiData.countries_stat[3].country_name}</td>
+                    <td>{this.props.covidApiData.countries_stat[3].cases}</td>
+                    <td>{this.props.covidApiData.countries_stat[3].deaths}</td>
+                    <td>{this.props.covidApiData.countries_stat[3].total_recovered}</td>
                     </tr>
                     <tr>
-                    <td>5</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
+                    <td>{this.props.covidApiData.countries_stat[4].country_name}</td>
+                    <td>{this.props.covidApiData.countries_stat[4].cases}</td>
+                    <td>{this.props.covidApiData.countries_stat[4].deaths}</td>
+                    <td>{this.props.covidApiData.countries_stat[4].total_recovered}</td>
                     </tr>
                     <tr>
-                    <td>6</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    </tr>
-
-                    <tr>
-                    <td>7</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
+                    <td>{this.props.covidApiData.countries_stat[5].country_name}</td>
+                    <td>{this.props.covidApiData.countries_stat[5].cases}</td>
+                    <td>{this.props.covidApiData.countries_stat[5].deaths}</td>
+                    <td>{this.props.covidApiData.countries_stat[5].total_recovered}</td>
                     </tr>
 
                     <tr>
-                    <td>8</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
+                    <td>{this.props.covidApiData.countries_stat[6].country_name}</td>
+                    <td>{this.props.covidApiData.countries_stat[6].cases}</td>
+                    <td>{this.props.covidApiData.countries_stat[6].deaths}</td>
+                    <td>{this.props.covidApiData.countries_stat[6].total_recovered}</td>
                     </tr>
 
                     <tr>
-                    <td>9</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
+                    <td>{this.props.covidApiData.countries_stat[7].country_name}</td>
+                    <td>{this.props.covidApiData.countries_stat[7].cases}</td>
+                    <td>{this.props.covidApiData.countries_stat[7].deaths}</td>
+                    <td>{this.props.covidApiData.countries_stat[7].total_recovered}</td>
                     </tr>
 
                     <tr>
-                    <td>10</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
+                    <td>{this.props.covidApiData.countries_stat[8].country_name}</td>
+                    <td>{this.props.covidApiData.countries_stat[8].cases}</td>
+                    <td>{this.props.covidApiData.countries_stat[8].deaths}</td>
+                    <td>{this.props.covidApiData.countries_stat[8].total_recovered}</td>
+                    </tr>
+
+                    <tr>
+                    <td>{this.props.covidApiData.countries_stat[9].country_name}</td>
+                    <td>{this.props.covidApiData.countries_stat[9].cases}</td>
+                    <td>{this.props.covidApiData.countries_stat[9].deaths}</td>
+                    <td>{this.props.covidApiData.countries_stat[9].total_recovered}</td>
                     </tr>
                     
                 </tbody>
