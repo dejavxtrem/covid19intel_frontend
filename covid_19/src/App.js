@@ -13,18 +13,18 @@ import NewForm from './components/NewForm.js'
 import Show from './components/Show.js'
 let apiKEY = '39f4998951msh07883f04b2178e7p1b36dbjsnbf1a0ddc7ca0'
 
-// if (process.env.NODE_ENV === 'development') {
-//   baseURL = 'http://localhost:3003'
-// } else {
-//   baseURL = 'https://fathomless-sierra-68956.herokuapp.com'
-// }
+if (process.env.NODE_ENV === 'development') {
+  baseURL = 'http://localhost:3003'
+} else {
+  baseURL = 'https://fathomless-sierra-68956.herokuapp.com'
+}
 
 
 
-//console.log(apiKEY)
+console.log(apiKEY)
 
 
-// .env BaseURL for React
+.env BaseURL for React
 let baseURL = process.env.REACT_APP_BASEURL
 
 
@@ -111,7 +111,7 @@ class CommentRequest extends React.Component {
     
     <table>
     <tbody>
-    <tr>
+        <tr>
           <td>Name:</td> 
           <td>Comment/request:</td>
           <td>Location:</td>
@@ -138,8 +138,8 @@ class CommentRequest extends React.Component {
 class App extends React.Component {
 
   state = {
-
-    covidData: {}
+    //create a placeholder for 208 array of objects
+    covidData: {countries_stat:[...Array(208).fill({...Object})]}
   }
 
 //compDidmount method
@@ -161,7 +161,7 @@ componentDidMount() {
  }
 
   render() {
-    console.log(this.state.requests)
+    
   return (
  
     <div className="App">
@@ -183,7 +183,7 @@ componentDidMount() {
           {/* dropdown component on col */}
             <Row>
               <Col>
-              <DropDown/>
+              <DropDown covidData={this.state.covidData}/>
               </Col>
             </Row>
           {/* table component on col */}
@@ -194,7 +194,8 @@ componentDidMount() {
             </Row>
              <Row>
               <Col>
-              <CommentRequest/>
+              {/* <CommentRequest/> */}
+              
               </Col>
             </Row>
         </Container>
