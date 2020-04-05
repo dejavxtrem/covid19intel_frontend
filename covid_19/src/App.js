@@ -13,125 +13,125 @@ import NewForm from './components/NewForm.js'
 import Show from './components/Show.js'
 let apiKEY = '39f4998951msh07883f04b2178e7p1b36dbjsnbf1a0ddc7ca0'
 
-// if (process.env.NODE_ENV === 'development') {
-//   baseURL = 'http://localhost:3003'
-// } else {
-//   baseURL = 'https://fathomless-sierra-68956.herokuapp.com'
-// }
+if (process.env.NODE_ENV === 'development') {
+  baseURL = 'http://localhost:3003'
+} else {
+  baseURL = 'https://fathomless-sierra-68956.herokuapp.com'
+}
 
 
 
-//console.log(apiKEY)
+console.log(apiKEY)
 
 
-// .env BaseURL for React
-// let baseURL = process.env.REACT_APP_BASEURL
+.env BaseURL for React
+let baseURL = process.env.REACT_APP_BASEURL
 
 
-// if (process.env.NODE_ENV === 'development') {
-//   baseURL = 'http://localhost:9000'
-// } else {
-//   baseURL = 'https://fathomless-sierra-68956.herokuapp.com'
-// }
+if (process.env.NODE_ENV === 'development') {
+  baseURL = 'http://localhost:9000'
+} else {
+  baseURL = 'https://fathomless-sierra-68956.herokuapp.com'
+}
 
-// console.log('current base URL:', baseURL)
+console.log('current base URL:', baseURL)
 
-// fetch(baseURL+ '/covidstats')
-//   .then(data => {
-//     return data.json()},
-//     err => console.log(err))
-//   .then(parsedData => console.log(parsedData),
-//    err => console.log(err))
+fetch(baseURL+ '/covidstats')
+  .then(data => {
+    return data.json()},
+    err => console.log(err))
+  .then(parsedData => console.log(parsedData),
+   err => console.log(err))
 
 
-// //comment component - to be moved to separate file later
-// class CommentRequest extends React.Component {
+//comment component - to be moved to separate file later
+class CommentRequest extends React.Component {
 
-//     state = {
-//       requests: []
-//     }
+    state = {
+      requests: []
+    }
   
-//     componentDidMount() {
-//       this.getComments()
-//     }
+    componentDidMount() {
+      this.getComments()
+    }
   
-//     getComments = () => {
-//       fetch(baseURL+ '/covidstats')
-//         .then(data => {
-//           return data.json()},
-//           err => console.log(err))
-//           .then(parsedData => this.setState({
-//             requests: parsedData
-//           }),
-//            err=> console.log(err))
-//     }
+    getComments = () => {
+      fetch(baseURL+ '/covidstats')
+        .then(data => {
+          return data.json()},
+          err => console.log(err))
+          .then(parsedData => this.setState({
+            requests: parsedData
+          }),
+           err=> console.log(err))
+    }
   
-//   //for show route
-//   getRequest = (request) => {
-//     this.setState({request})
-//   }
+  //for show route
+  getRequest = (request) => {
+    this.setState({request})
+  }
   
   
-//    // New Form HandleAdd 
-//     handleAddRequest = (requests) => {
-//       const copyRequest = [...this.state.requests]
-//       copyRequest.unshift(requests)
-//       this.setState({
-//         requests: copyRequest,
-//         name: '',
-//         comments: '',
-//         location: '',
-//       })
-//     }
+   // New Form HandleAdd 
+    handleAddRequest = (requests) => {
+      const copyRequest = [...this.state.requests]
+      copyRequest.unshift(requests)
+      this.setState({
+        requests: copyRequest,
+        name: '',
+        comments: '',
+        location: '',
+      })
+    }
   
-//       //function to delete a request and return all the others
-//       deleteRequest = (id) => {
-//         fetch(baseURL + '/covidstats/' + id, {
-//           method: 'DELETE'
-//         }).then ( res => {
-//           const requestsArr = this.state.requests.filter( request => {
-//             return request._id !== id
-//           })
-//           this.setState({requests: requestsArr})
-//         })
-//       }
+      //function to delete a request and return all the others
+      deleteRequest = (id) => {
+        fetch(baseURL + '/covidstats/' + id, {
+          method: 'DELETE'
+        }).then ( res => {
+          const requestsArr = this.state.requests.filter( request => {
+            return request._id !== id
+          })
+          this.setState({requests: requestsArr})
+        })
+      }
   
-//     render() {
-//       console.log(this.state.requests)
-//     return (
+    render() {
+      console.log(this.state.requests)
+    return (
   
-//       // Comments/Requests
-//       <div className="commentsContainer">
-//         <h1 className="comment-title">Post any comments or requests in your area</h1>
-//         <NewForm baseURL={baseURL}
-//     handleAddRequest={this.handleAddRequest}/>
+      // Comments/Requests
+      <div className="commentsContainer">
+        <h1 className="comment-title">Post any comments or requests in your area</h1>
+        <NewForm baseURL={baseURL}
+    handleAddRequest={this.handleAddRequest}/>
   
-//     {/* this is where the requests will display */}
-//     <br/>
+    {/* this is where the requests will display */}
+    <br/>
     
-//     <table>
-//     <tbody>
-//         <tr>
-//           <td>Name:</td> 
-//           <td>Comment/request:</td>
-//           <td>Location:</td>
-//          </tr> 
-//       {this.state.requests.map(request => (
-//          <tr key={request._id}
-//          onMouseOver={() => this.getRequest(request)}>
-//           <td>{request.name}</td>
-//           <td>{request.comments}</td>
-//           <td>{request.location}</td>
-//           <td className="delete"><button onClick={() => this.deleteRequest(request._id)}>Delete</button></td>
-//           </tr>
-//       ))}
-//     </tbody>
-//   </table>
-//   {this.state.request ? <Show request={this.state.request}/> : null}
-//       </div>
-//     );
-//   }
-//   }
+    <table>
+    <tbody>
+        <tr>
+          <td>Name:</td> 
+          <td>Comment/request:</td>
+          <td>Location:</td>
+         </tr> 
+      {this.state.requests.map(request => (
+         <tr key={request._id}
+         onMouseOver={() => this.getRequest(request)}>
+          <td>{request.name}</td>
+          <td>{request.comments}</td>
+          <td>{request.location}</td>
+          <td className="delete"><button onClick={() => this.deleteRequest(request._id)}>Delete</button></td>
+          </tr>
+      ))}
+    </tbody>
+  </table>
+  {this.state.request ? <Show request={this.state.request}/> : null}
+      </div>
+    );
+  }
+  }
 
   
   //Dejay app component
