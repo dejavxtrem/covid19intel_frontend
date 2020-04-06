@@ -22,9 +22,9 @@ class UpdateModal extends React.Component {
       fetch(this.props.baseURL + '/covidstats/' + this.props.request._id, {
           method: 'PUT',
           body: JSON.stringify({
-              name: this.props.name,
-              comments: this.props.comments,
-              location: this.props.location
+              name: this.state.name,
+              comments: this.state.comments,
+              location: this.state.location
           }),
           headers: {
               'Content-Type': 'application/json'
@@ -35,7 +35,7 @@ class UpdateModal extends React.Component {
       .then (resJson => {
           //add the received data to state in app
           this.props.handleEditRequest(resJson)
-          this.setState({name: '', species: '', breed: ''})
+          this.setState({name: '', comments: '', location: ''})
       }).catch (error => console.error({'Error': error}))
   }
   
@@ -44,6 +44,7 @@ class UpdateModal extends React.Component {
   }
     render () {
       return (
+
         <>
         <Modal centered="true"  show={this.props.showUp}  onHide={this.props.hideModal}>
            
@@ -54,7 +55,7 @@ class UpdateModal extends React.Component {
                     </ModalTitle>
                 </ModalHeader>
                 <ModalBody>
-                  <Form onSubmit={this.handleSubmit}>
+                  <Form>
             <Form.Row>
               <Form.Label>Name</Form.Label>
               <Form.Control

@@ -106,8 +106,8 @@ class CommentRequest extends React.Component {
       })
     }
 
-    handleEditRequest = (request) => {
-      console.log(request)
+    handleEditRequest = (id) => {
+      
     }
   
       //function to delete a request and return all the others
@@ -159,7 +159,7 @@ class CommentRequest extends React.Component {
   <br/>
   <br/>
   
-  {this.state.getEditRequestActive ? <UpdateModal baseURL={baseURL}request={this.state.request} showUp={this.state.show}  hideModal={this.handleClose}/> : null}
+  {this.state.getEditRequestActive ? <UpdateModal baseURL={baseURL}request={this.state.request} showUp={this.state.show}  hideModal={this.handleClose} handleEditRequest={this.handleEditRequest}/> : null}
       </div>
     );
   }
