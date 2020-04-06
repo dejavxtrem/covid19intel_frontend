@@ -30,7 +30,10 @@ class DropDown extends React.Component {
        total_cases_per_1m_population: '',
        total_recovered: ''
    },
-   flagImg: ''
+   flagImg: '',
+   population: '',
+   Region: '',
+   Capital: ''
  }
  
   handleShow = () => {
@@ -51,6 +54,9 @@ finderCountry = (valueFinder) => {
   this.props.covidFlag.some(flagFinder => {
       if (flagFinder.name === valueFinder) {
         this.setState({flagImg: flagFinder.flag})
+        this.setState({population:flagFinder.population })
+        this.setState({Region: flagFinder.region})
+        this.setState({Capital: flagFinder.capital})
       }
   })
 }
@@ -85,7 +91,7 @@ finderCountry = (valueFinder) => {
                
               <ReactFlagsSelect  className="menu-flags" onSelect={this.onSelectFlag}/>
               <Button variant="primary" onClick={this.handleShow}>GO</Button>
-              <CountryModal showUp={this.state.show}  hideModal={this.handleClose} countryPick={this.state.countryPicked} flagDisplay={this.state.flagImg}/>
+              <CountryModal showUp={this.state.show}  hideModal={this.handleClose} countryPick={this.state.countryPicked} flagDisplay={this.state.flagImg} flagPopulation={this.state.population} flagRegion={this.state.Region} flagCapital={this.state.Capital}/>
               </Col>
             </Row>
           </Container>

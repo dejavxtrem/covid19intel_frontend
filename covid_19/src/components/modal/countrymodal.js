@@ -23,8 +23,9 @@ class CountryModal extends React.Component {
                     <Card.Body>
                     <Card.Title>{this.props.countryPick.country_name}</Card.Title>
                     <Card.Text>
-                        Some quick example text to build on the card title and make up the bulk of
-                        the card's content.
+                        Population: {this.props.flagPopulation} <br></br>
+                        Region: {this.props.flagRegion} <br></br>
+                        Capital: {this.props.flagCapital}
                     </Card.Text>
                     </Card.Body>
                     <ListGroup className="list-group-flush">
