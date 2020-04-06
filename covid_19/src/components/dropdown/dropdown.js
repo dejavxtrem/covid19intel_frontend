@@ -1,51 +1,91 @@
 import React from 'react';
-import Modal from 'react-bootstrap/Modal';
-import ModalDialog from 'react-bootstrap/ModalDialog';
-import ModalHeader from 'react-bootstrap/ModalHeader';
-import ModalTitle from 'react-bootstrap/ModalTitle';
-import ModalBody from 'react-bootstrap/ModalBody'
-import ModalFooter from 'react-bootstrap/ModalFooter';
+import ReactFlagsSelect from 'react-flags-select';
+import 'react-flags-select/css/react-flags-select.css';
+import  './dropdown.css'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+//drop down countries imports
+import countryFinder from './dropdowncountries';
+import CountryModal from '../modal/countrymodal'
 import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import ListGroup from 'react-bootstrap/ListGroup';
 
 
-class CountryModal extends React.Component {
+
+
+class DropDown extends React.Component {
+
+ state = {
+   show: false,
+   setShow: false,
+   countryPicked: {
+       active_cases: '',
+       case: '',
+       country_name: '',
+       deaths: '',
+       new_cases: '',
+       new_deaths: '',
+       region: '',
+       serious_critical: '',
+       total_cases_per_1m_population: '',
+       total_recovered: ''
+   }
+ }
+ 
+  handleShow = () => {
+    this.setState({show: true});
+  }
+
+handleClose = () => {
+  this.setState({show: false})
+}
+
+//function to check if the dropdown country string matches the country name in the api data
+finderCountry = (valueFinder) => {
+  this.props.covidData.countries_stat.some(countryFind => {
+     if (countryFind.country_name === valueFinder) {
+        this.setState({countryPicked: countryFind})
+     }
+  })
+}
+  
+//Convert DropDown country abbreviation to search country string
+  onSelectFlag = (country) => {
+      let valueFinder;
+      for (let [key, value] of Object.entries(countryFinder)) {
+         if (country === key) {
+           console.log(`${value}`)
+           valueFinder = value
+         }
+      }
+    //pass down the country string to the API props data to compare country name
+      this.finderCountry(valueFinder)
+  }
+
+    
 
 
     render () {
+  
+    //console.log(this.finderCounry())
         return (
-            <Modal
-            centered="true"  show={this.props.showUp}  onHide={this.props.hideModal}> 
-            <ModalDialog>
-                    <Card style={{ width: '18rem' }}>
-                    <Card.Img variant="top" src="https://restcountries.eu/data/afg.svg" />
-                    <Card.Body>
-                    <Card.Title>{this.props.countryPick.country_name}</Card.Title>
-                    <Card.Text>
-                        Some quick example text to build on the card title and make up the bulk of
-                        the card's content.
-                    </Card.Text>
-                    </Card.Body>
-                    <ListGroup className="list-group-flush">
-                     <ListGroup.Item> Cases: {this.props.countryPick.cases}</ListGroup.Item>
-                    <ListGroup.Item>Deaths: {this.props.countryPick.deaths}</ListGroup.Item>
-                    <ListGroup.Item>Active Cases: {this.props.countryPick.active_cases}</ListGroup.Item>
-                    <ListGroup.Item>New Cases: {this.props.countryPick.new_cases}</ListGroup.Item>
-                    <ListGroup.Item>New Deaths: {this.props.countryPick.new_deaths}</ListGroup.Item>
-                    <ListGroup.Item>Total Recovered: {this.props.countryPick.total_recovered}</ListGroup.Item>
-                   <ListGroup.Item>Total cases Per Population: {this.props.countryPick.
-total_cases_per_1m_population}</ListGroup.Item>
-                    </ListGroup>
-                    </Card>
-                 <ModalFooter>
-                 <Button onClick={this.props.hideModal}>Close</Button>
-                 </ModalFooter>
-                 
-            </ModalDialog>
-            </Modal>
+            <Container className="dropdown">
+            {/* dropdown component on col */}
+            <Row>
+              <Col className="coldrop">
+               
+              <ReactFlagsSelect  className="menu-flags" onSelect={this.onSelectFlag}/>
+              <Button variant="primary" onClick={this.handleShow}>GO</Button>
+              <CountryModal showUp={this.state.show}  hideModal={this.handleClose} countryPick={this.state.countryPicked}/>
+              </Col>
+            </Row>
+          </Container>
+            
         )
     }
+
+
 }
 
-export default CountryModal;
+
+export default DropDown;
