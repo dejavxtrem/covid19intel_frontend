@@ -72,7 +72,7 @@ finderCountry = (valueFinder) => {
               <Col className="coldrop">
                
               <ReactFlagsSelect  className="menu-flags" onSelect={this.onSelectFlag}/>
-              <Button variant="primary" onClick={this.handleShow}>GO</Button>
+              <Button className="gobutton" govariant="primary" onClick={this.handleShow}>GO</Button>
               <CountryModal showUp={this.state.show}  hideModal={this.handleClose}/>
               </Col>
             </Row>

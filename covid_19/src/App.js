@@ -12,7 +12,9 @@ import AmChartMap from  './components/amchart/amchart';
 import NewForm from './components/NewForm.js'
 import Show from './components/Show.js'
 import UpdateModal from './components/UpdateForm'
+import Table from 'react-bootstrap/Table'
 let apiKEY = '39f4998951msh07883f04b2178e7p1b36dbjsnbf1a0ddc7ca0'
+
 
 // if (process.env.NODE_ENV === 'development') {
 //   baseURL = 'http://localhost:3003'
@@ -119,12 +121,14 @@ class CommentRequest extends React.Component {
     {/* this is where the requests will display */}
     <br/>
     
-    <table>
+    <Table striped bordered hover responsive="lg" className="commenttable">
     <tbody>
-        <tr>
+        <tr className="commentheaders">
           <td>Name:</td> 
           <td>Comment/request:</td>
           <td>Location:</td>
+          <td>Delete Comment:</td>
+          <td>Edit Comment:</td>
          </tr> 
       {this.state.requests.map(request => (
          <tr key={request._id}>
@@ -136,7 +140,7 @@ class CommentRequest extends React.Component {
           </tr>
       ))}
     </tbody>
-  </table>
+  </Table>
   {this.state.getRequestActive ? <Show request={this.state.request}/> : null}
   <br/>
   <br/>
