@@ -1,7 +1,9 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import NewForm from './components/NewForm.js'
 import Show from './components/Show.js'
+import UpdateModal from './components/UpdateForm.js'
 
 // .env BaseURL for React
 let baseURL = process.env.REACT_APP_BASEURL
@@ -25,6 +27,7 @@ fetch(baseURL+ '/covidstats')
 class App extends React.Component {
 
   state = {
+    
     requests: []
   }
 
@@ -45,7 +48,16 @@ class App extends React.Component {
 
 //for show route
 getRequest = (request) => {
-  this.setState({request})
+  this.setState({request}, () => {
+    console.log(this.state)
+  })
+}
+
+// Edit
+updateRequest =(request) => {
+  this.setState({request}) 
+    console.log(this.state)
+  
 }
 
 
@@ -61,6 +73,10 @@ getRequest = (request) => {
     })
   }
 
+  handleEditRequest = (request) => {
+    console.log(request)
+  }
+
     //function to delete a request and return all the others
     deleteRequest = (id) => {
       fetch(baseURL + '/covidstats/' + id, {
@@ -73,8 +89,18 @@ getRequest = (request) => {
       })
     }
 
+    showModal = () => {
+      this.setState({ show: true });
+    };
+  
+    hideModal = () => {
+      this.setState({ show: false });
+    };
+
+    
+
   render() {
-    console.log(this.state.requests)
+    // console.log(this.state.requests)
   return (
 
     // Comments/Requests
@@ -94,17 +120,19 @@ getRequest = (request) => {
         <td>Location:</td>
        </tr> 
     {this.state.requests.map(request => (
-       <tr key={request._id}
-       onMouseOver={() => this.getRequest(request)}>
+       <tr key={request._id}>
+      
         <td>{request.name}</td>
         <td>{request.comments}</td>
         <td>{request.location}</td>
-        <button onClick={() => this.deleteRequest(request._id)}>Delete</button>
+        <td><button onClick={() => this.deleteRequest(request._id)}>Delete</button></td>
+        <td><button onClick={() => this.showModal()} >Edit</button></td>
         </tr>
     ))}
   </tbody>
 </table>
-{this.state.request ? <Show request={this.state.request}/> : null}
+{/* {this.state.request ? <Show request={this.state.request}/> : null} */}
+{this.state.request ? <UpdateModal baseURL={baseURL} request={this.state.request} handleEditRequest={this.handleEditRequest}/> : null}
     </div>
   );
 }
