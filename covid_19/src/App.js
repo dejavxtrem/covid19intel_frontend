@@ -132,8 +132,8 @@ class CommentRequest extends React.Component {
          </tr> 
       {this.state.requests.map(request => (
          <tr key={request._id}>
-          <td onMouseOver={() => this.getRequest(request)}>{request.name}</td>
-          <td>{request.comments}</td>
+          <td>{request.name}</td>
+          <td onMouseOver={() => this.getRequest(request)}>{request.comments}</td>
           <td>{request.location}</td>
           <td className="delete"><button onClick={() => this.deleteRequest(request._id)}>Delete</button></td>
           <td className="edit"><button onClick={() => {this.getEditRequest(request)} }>Edit</button></td>

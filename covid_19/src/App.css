@@ -1,7 +1,7 @@
-
+/* 
 .amchart {
   border-style: solid;
-}
+} */
 
 .App {
   text-align: center;
@@ -54,6 +54,7 @@
   z-index: 1;
   padding: 1em ;
   border-radius: 10px  0 0 10px ;
+  color: black;
 
 }
 
@@ -78,4 +79,15 @@
 form {
   display: flex;
   justify-content: left;
+}
+
+
+* table {
+  -moz-box-shadow: 10px 10px 5px #ccc;
+  -webkit-box-shadow: 10px 10px 5px #ccc;
+  box-shadow: 10px 10px 5px #ccc;
+  /* -moz-border-radius:25px;
+  -webkit-border-radius:25px; */
+  /* border-radius: 25px; */
+  margin-bottom: 10px;
 }
