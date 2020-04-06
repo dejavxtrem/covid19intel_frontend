@@ -139,12 +139,14 @@ class App extends React.Component {
 
   state = {
     //create a placeholder for 208 array of objects
-    covidData: {countries_stat:[...Array(208).fill({...Object})]}
+    covidData: {countries_stat:[...Array(208).fill({...Object})]},
+    flagData: [...Array(249).fill({...Object})]
   }
 
 //compDidmount method
 componentDidMount() {
   this.getCovidStats();
+  this.getFlagImage();
 }
 
 //make fetch request to get data from api
@@ -159,6 +161,18 @@ componentDidMount() {
    }).then(data => data.json(), err => console.log(err))
      .then(parsedData => this.setState({covidData: parsedData}), err => console.log('parsedData', err))
  }
+
+
+ getFlagImage = () => {
+  fetch('https://restcountries.eu/rest/v2/all', {
+    "method": "GET"
+  }).then(data => data.json(), err => console.log(err))
+    .then(parsedData => this.setState({flagData: parsedData}), err => console.log('parsedData', err))
+
+ }
+
+
+
 
   render() {
     
@@ -183,7 +197,7 @@ componentDidMount() {
           {/* dropdown component on col */}
             <Row>
               <Col>
-              <DropDown covidData={this.state.covidData}/>
+              <DropDown covidData={this.state.covidData}  covidFlag={this.state.flagData}/>
               </Col>
             </Row>
           {/* table component on col */}

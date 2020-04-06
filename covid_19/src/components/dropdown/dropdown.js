@@ -29,7 +29,8 @@ class DropDown extends React.Component {
        serious_critical: '',
        total_cases_per_1m_population: '',
        total_recovered: ''
-   }
+   },
+   flagImg: ''
  }
  
   handleShow = () => {
@@ -47,6 +48,11 @@ finderCountry = (valueFinder) => {
         this.setState({countryPicked: countryFind})
      }
   })
+  this.props.covidFlag.some(flagFinder => {
+      if (flagFinder.name === valueFinder) {
+        this.setState({flagImg: flagFinder.flag})
+      }
+  })
 }
   
 //Convert DropDown country abbreviation to search country string
@@ -63,7 +69,10 @@ finderCountry = (valueFinder) => {
   }
 
     
-
+//function to get flag for modal pop up
+// getFlagImage = () => {
+    
+// }
 
     render () {
   
@@ -76,7 +85,7 @@ finderCountry = (valueFinder) => {
                
               <ReactFlagsSelect  className="menu-flags" onSelect={this.onSelectFlag}/>
               <Button variant="primary" onClick={this.handleShow}>GO</Button>
-              <CountryModal showUp={this.state.show}  hideModal={this.handleClose} countryPick={this.state.countryPicked}/>
+              <CountryModal showUp={this.state.show}  hideModal={this.handleClose} countryPick={this.state.countryPicked} flagDisplay={this.state.flagImg}/>
               </Col>
             </Row>
           </Container>

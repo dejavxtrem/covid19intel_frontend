@@ -19,7 +19,7 @@ class CountryModal extends React.Component {
             centered="true"  show={this.props.showUp}  onHide={this.props.hideModal}> 
             <ModalDialog>
                     <Card style={{ width: '18rem' }}>
-                    <Card.Img variant="top" src="https://restcountries.eu/data/afg.svg" />
+                    <Card.Img variant="top" src={this.props.flagDisplay} />
                     <Card.Body>
                     <Card.Title>{this.props.countryPick.country_name}</Card.Title>
                     <Card.Text>
