@@ -55,7 +55,7 @@ class UpdateModal extends React.Component {
                     </ModalTitle>
                 </ModalHeader>
                 <ModalBody>
-                  <Form>
+                  <Form onSubmit={this.hideModal}>
             <Form.Row>
               <Form.Label>Name</Form.Label>
               <Form.Control

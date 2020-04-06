@@ -106,9 +106,17 @@ class CommentRequest extends React.Component {
       })
     }
 
-    handleEditRequest = (id) => {
-      
+    handleEditRequest = (data) => {
+      const newData = this.state.requests.filter( request => {
+        return request._id !== data._id
+      })
+      newData.push(data);
+      this.setState({ 
+        requests: newData,
+        show: false
+      })
     }
+  
   
       //function to delete a request and return all the others
       deleteRequest = (id) => {
