@@ -15,8 +15,8 @@ class TableComponent extends React.Component {
     //   }
 
     render () {
-    //console.log(this.props.covidApiData.countries_stat[1])
-
+    console.log(this.props.covidApiData.countries_stat[0])
+       
         return (
             <Table striped bordered hover responsive="lg">
             <thead>
