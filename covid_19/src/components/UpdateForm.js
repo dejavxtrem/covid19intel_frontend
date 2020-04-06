@@ -1,74 +1,97 @@
 import React from 'react'
+import Modal from 'react-bootstrap/Modal';
+import ModalDialog from 'react-bootstrap/ModalDialog';
+import ModalHeader from 'react-bootstrap/ModalHeader';
+import ModalTitle from 'react-bootstrap/ModalTitle';
+import ModalBody from 'react-bootstrap/ModalBody'
+import ModalFooter from 'react-bootstrap/ModalFooter';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form'
 
 class UpdateModal extends React.Component {
 
-    // state = {
-    //     name: '',
-    //     comments: '',
-    //     location: '',
-    // }
-
-
-
-    handleChange = (event) => {
-        this.setState({ [event.target.id]: event.target.value})
-      }
-    // handleCommentsChange = (event) => {
-    //     this.setState({ comments: event.target.value})
-    //   }
-    // handleLocationChange = (event) => {
-    //     this.setState({ location: event.target.value})
-    //   }
-
-    handleEditSubmit = (event) => {
-        event.preventDefault()
-        fetch(this.props.baseURL + '/covidstats', + this.props.request._id, {
+//     state = {
+//       name: '',
+//       comments: '',
+//       location: ''
+//   }
+  
+  handleSubmit = (event) => {
+    //   event.preventDefault()
+      //send the data to the server
+      fetch(this.props.baseURL + '/covidstats/' + this.props.request._id, {
           method: 'PUT',
-          body: JSON.stringify({name: this.props.name, comments: this.props.comments, location: this.props.location}),
+          body: JSON.stringify({
+              name: this.props.name,
+              comments: this.props.comments,
+              location: this.props.location
+          }),
           headers: {
-            'Content-Type': 'application/json'
+              'Content-Type': 'application/json'
           }
-        }).then (res => res.json())
-          .then (resJson => {
-            this.props.handleEditRequest(resJson)
-            this.setState({
-              name: '',
-              comments: '',
-              location: ''
-            })
-        }).catch (error => console.error({'Error': error}))
-      }
-
-  render () {
-      console.log(this.state)
-    return (
-        <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div className="modal-dialog" role="document">
-            <div className="modal-content">
-                <div className="modal-header">
-                    <h5 className="modal-title" id="exampleModalLabel">Edit Jewel</h5>
-                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-      <form onSubmit={this.handleEditSubmit}>
-          <div className="modal-body">
-                <label htmlFor="name"></label>
-                <input type="text" id="name" name="name" onChange={this.handleChange} defaultValue={this.props.request.name} />
-                <input type="text" id="comments" name="comments" onChange={this.handleChange} defaultValue={this.props.request.comments} />
-                <input type="text" id="location" name="location" onChange={this.handleChange} defaultValue={this.props.request.location} />
-            </div>
-            <div className="modal-footer">
-            <input type="submit" value="Save Changes" className="button-primary" />
-            <button className="button-red"> Close </button>
-            
-          </div>
-        </form>
-        </div>
-        </div>
-        </div>
-        </div>
-      
-    )
+      })
+      //the server then responds with json
+      .then (res => res.json())
+      .then (resJson => {
+          //add the received data to state in app
+          this.props.handleEditRequest(resJson)
+          this.setState({name: '', species: '', breed: ''})
+      }).catch (error => console.error({'Error': error}))
   }
+  
+  handleChange = (event) => {
+      this.setState({[event.target.id]: event.target.value})
+  }
+    render () {
+      return (
+        <>
+        <Modal centered="true"  show={this.props.showUp}  onHide={this.props.hideModal}>
+           
+             <ModalDialog>
+             <ModalHeader closeButton >
+                    <ModalTitle>
+                        Update your request
+                    </ModalTitle>
+                </ModalHeader>
+                <ModalBody>
+                  <Form onSubmit={this.handleSubmit}>
+            <Form.Row>
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                type="text"
+                id="name"
+                defaultValue={this.props.request.name}
+                onChange={this.handleChange}
+              />
+              <Form.Label>Comments</Form.Label>
+              <Form.Control
+                type="text"
+                id="comments"
+                defaultValue={this.props.request.comments}
+                onChange={this.handleChange}
+              />
+              <Form.Label>Location</Form.Label>
+              <Form.Control
+                type="text"
+                id="location"
+                defaultValue={this.props.request.location}
+                onChange={this.handleChange}
+              />
+              </Form.Row>
+            </Form>
+            <ModalFooter >
+              
+                    
+              <Button onClick={this.handleSubmit}>Update Request</Button>
+              <Button onClick={this.props.hideModal}>Close</Button>
+            </ModalFooter>
+            </ModalBody>
+            </ModalDialog>
+          </Modal>
+          <br/><br/><br/>
+        </>
+      )
+    }
 }
+
 export default UpdateModal
