@@ -1,7 +1,4 @@
-/* 
-.amchart {
-  border-style: solid;
-} */
+
 * {
   color: #1b2a49;
 }
@@ -16,11 +13,6 @@
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
 
 .App-header {
   background-color: #282c34;
@@ -66,7 +58,7 @@
   color: whitesmoke;
 }
 
-h1 {
+h1, th {
   font-family: 'Source Code Pro', monospace;
 }
 
