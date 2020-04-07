@@ -9,13 +9,9 @@ import MapContainer from './components/headermap';
 import DropDown from  './components/dropdown/dropdown';
 import TableComponent from './components/table/table'
 import AmChartMap from  './components/amchart/amchart';
-<<<<<<< HEAD
 import Carousel from 'react-bootstrap/Carousel';
 
-
-=======
 import Button from 'react-bootstrap/Button';
->>>>>>> master
 //Comment imports
 import NewForm from './components/NewForm.js'
 import Show from './components/Show.js'
