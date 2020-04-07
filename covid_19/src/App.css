@@ -1,11 +1,11 @@
-/* 
-.amchart {
-  border-style: solid;
-} */
+
+* {
+  color: #1b2a49;
+}
 
 .App {
   text-align: center;
- /* background-color: #0f4c75; */
+  
 }
 
 .App-logo {
@@ -13,11 +13,6 @@
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
 
 .App-header {
   background-color: #282c34;
@@ -33,16 +28,6 @@
 .App-link {
   color: #61dafb;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 
 
 .details {
@@ -73,7 +58,7 @@
   color: whitesmoke;
 }
 
-h1 {
+h1, th {
   font-family: 'Source Code Pro', monospace;
 }
 
@@ -89,6 +74,15 @@ form {
 
 .newformjumbo {
   background-color: #1b2a49;
+  margin-top: 20px;
+  border: 1px solid #dee2e6 ;
+  -moz-box-shadow: 10px 10px 5px #ccc;
+  -webkit-box-shadow: 10px 10px 5px #ccc;
+  box-shadow: 10px 10px 5px #ccc;
+  -moz-border-radius:25px;
+  -webkit-border-radius:25px;
+  border-radius:25px;
+  margin-bottom: 30px;
 }
 
 
