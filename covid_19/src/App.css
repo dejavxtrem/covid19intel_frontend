@@ -5,6 +5,7 @@
 
 .App {
   text-align: center;
+ /* background-color: #0f4c75; */
 }
 
 .App-logo {
@@ -62,8 +63,6 @@
   font-weight: bold;
 }
 
-
-
 .commenttable {
   max-width: 75%;
 }
@@ -90,4 +89,5 @@ form {
   -webkit-border-radius:25px; */
   /* border-radius: 25px; */
   margin-bottom: 10px;
+  background-color: white;
 }
