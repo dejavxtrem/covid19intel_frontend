@@ -10,7 +10,7 @@ import DropDown from  './components/dropdown/dropdown';
 import TableComponent from './components/table/table'
 import AmChartMap from  './components/amchart/amchart';
 import Carousel from 'react-bootstrap/Carousel';
-
+import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
 //Comment imports
 import NewForm from './components/NewForm.js'
@@ -257,7 +257,9 @@ componentDidMount() {
                 <AmChartMap/>
                 </Carousel.Item>
                 <Carousel.Item>
-                <AmChartMap/>
+                <img fluid  className="slider"
+              src="https://www.cdc.gov/coronavirus/2019-ncov/images/social/covid19-prevention-fb.png"
+              alt="First slide"/>
                 </Carousel.Item>
               </Carousel>
               </Col>

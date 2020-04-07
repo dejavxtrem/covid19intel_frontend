@@ -46,13 +46,24 @@ handleClose = () => {
 
 //function to check if the dropdown country string matches the country name in the api data
 finderCountry = (valueFinder) => {
+  console.log(valueFinder)
   this.props.covidData.countries_stat.some(countryFind => {
-     if (countryFind.country_name === valueFinder) {
+     if (countryFind.country_name === valueFinder ) {
+       console.log(countryFinder.country_name)
         this.setState({countryPicked: countryFind})
+     } else if (countryFind.country_name === 'USA') {
+      this.setState({countryPicked: countryFind})
+     } else  {
+         this.setState({countryFind: ' '})
      }
   })
   this.props.covidFlag.some(flagFinder => {
-      if (flagFinder.name === valueFinder) {
+      if (flagFinder.name === valueFinder ) {
+        this.setState({flagImg: flagFinder.flag})
+        this.setState({population:flagFinder.population })
+        this.setState({Region: flagFinder.region})
+        this.setState({Capital: flagFinder.capital})
+      } else if (flagFinder.nativeName == valueFinder) {
         this.setState({flagImg: flagFinder.flag})
         this.setState({population:flagFinder.population })
         this.setState({Region: flagFinder.region})
@@ -66,7 +77,7 @@ finderCountry = (valueFinder) => {
       let valueFinder;
       for (let [key, value] of Object.entries(countryFinder)) {
          if (country === key) {
-           console.log(`${value}`)
+           //console.log(`${value}`)
            valueFinder = value
          }
       }
