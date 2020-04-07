@@ -46,32 +46,32 @@ class UpdateModal extends React.Component {
       return (
 
         <>
-        <Modal centered="true"  show={this.props.showUp}  onHide={this.props.hideModal}>
+        <Modal centered="true"  show={this.props.showUp}  onHide={this.props.hideModal} className="modalText">
            
              <ModalDialog>
              <ModalHeader closeButton >
-                    <ModalTitle>
+                    <ModalTitle className="titleText">
                         Update your request
                     </ModalTitle>
                 </ModalHeader>
                 <ModalBody>
                   <Form onSubmit={this.hideModal}>
             <Form.Row>
-              <Form.Label>Name</Form.Label>
+              <Form.Label className="titleText">Name</Form.Label>
               <Form.Control
                 type="text"
                 id="name"
                 defaultValue={this.props.request.name}
                 onChange={this.handleChange}
               />
-              <Form.Label>Comments</Form.Label>
+              <Form.Label className="titleText">Comments</Form.Label>
               <Form.Control
                 type="text"
                 id="comments"
                 defaultValue={this.props.request.comments}
                 onChange={this.handleChange}
               />
-              <Form.Label>Location</Form.Label>
+              <Form.Label className="titleText">Location</Form.Label>
               <Form.Control
                 type="text"
                 id="location"

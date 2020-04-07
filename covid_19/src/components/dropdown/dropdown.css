@@ -23,7 +23,10 @@ background-color: lightslategray;
 }
 .menu-flags {
     font-weight: 100;
+    font-family: 'Noto Serif JP', serif;
 }
+
+
 
 .gobutton {
     margin-left: 20px;
