@@ -8,6 +8,7 @@ import ModalFooter from 'react-bootstrap/ModalFooter';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
+import './countrymodal.css'
 
 
 class CountryModal extends React.Component {
@@ -18,7 +19,7 @@ class CountryModal extends React.Component {
             <Modal
             centered="true"  show={this.props.showUp}  onHide={this.props.hideModal}> 
             <ModalDialog>
-                    <Card style={{ width: '18rem' }}>
+                    <Card className="card" style={{ width: '18rem'}}>
                     <Card.Img variant="top" src={this.props.flagDisplay} />
                     <Card.Body>
                     <Card.Title>{this.props.countryPick.country_name}</Card.Title>
@@ -35,7 +36,7 @@ class CountryModal extends React.Component {
                     <ListGroup.Item>New Cases: {this.props.countryPick.new_cases}</ListGroup.Item>
                     <ListGroup.Item>New Deaths: {this.props.countryPick.new_deaths}</ListGroup.Item>
                     <ListGroup.Item>Total Recovered: {this.props.countryPick.total_recovered}</ListGroup.Item>
-                   <ListGroup.Item>Total cases Per Population: {this.props.countryPick.
+                   <ListGroup.Item>Total cases Per 1m Population: {this.props.countryPick.
 total_cases_per_1m_population}</ListGroup.Item>
                     </ListGroup>
                     </Card>
