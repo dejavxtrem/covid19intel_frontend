@@ -41,7 +41,7 @@ class NewForm extends React.Component {
     
     render() {
             return (
-              <Jumbotron>
+              <Jumbotron className='newformjumbo'>
                  <h1 className="comment-title">Post Comment/Request</h1>
                <Form onSubmit={this.handleSubmit}>
                  {/* <Form.Group controlId="formBasicEmail"></Form.Group>
