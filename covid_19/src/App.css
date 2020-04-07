@@ -71,6 +71,10 @@
   font-size: 4rem;
 }
 
+h1 {
+  font-family: 'Source Code Pro', monospace;
+}
+
 .comment-title {
   text-align: left;
 }
@@ -90,4 +94,9 @@ form {
   /* border-radius: 25px; */
   margin-bottom: 10px;
   background-color: white;
+}
+
+.newform {
+  display: inline;
+  max-width: 30%;
 }

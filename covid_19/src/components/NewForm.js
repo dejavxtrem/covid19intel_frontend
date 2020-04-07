@@ -1,6 +1,8 @@
 import React from 'react'
 import '../App.css';
 import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button';
+import Jumbotron from 'react-bootstrap/Jumbotron'
 
 
 
@@ -39,14 +41,27 @@ class NewForm extends React.Component {
     
     render() {
             return (
+              <Jumbotron>
+                 <h1 className="comment-title">Post Comment/Request</h1>
                <Form onSubmit={this.handleSubmit}>
-                 <Form.Group controlId="formBasicEmail"></Form.Group>
+                 {/* <Form.Group controlId="formBasicEmail"></Form.Group>
                    <input type="text" id="name" name="name" onChange={this.handleChange} value={this.state.name} placeholder="Name" />
                    <input type="text" id="comments" name="comments" onChange={this.handleChange} value={this.state.comments} placeholder="Comment" />
                    <input type="text" id="location" name="location" onChange={this.handleChange} value={this.state.location} placeholder="Location" />
                    <input type="submit" value="Submit"/>
 
+                   <Form onSubmit={this.handleSubmit}> */}
+                 <Form.Row>
+                   <Form.Control className="newform" type="text" id="name" name="name" onChange={this.handleChange} value={this.state.name} placeholder="Name" />
+                   <Form.Control className="newform" type="text" id="comments" name="comments" onChange={this.handleChange} value={this.state.comments} placeholder="Comment" />
+                   <Form.Control className="newform" type="text" id="location" name="location" onChange={this.handleChange} value={this.state.location} placeholder="Location" />
+                   <br/><br/>
+                   <Button type="submit" value="Submit">Add Comment</Button>
+              </Form.Row>
+         
+
                </Form>  
+               </Jumbotron>
             )
         }
 }
