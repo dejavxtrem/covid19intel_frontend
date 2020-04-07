@@ -1,4 +1,5 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 //Dejay imports
 import Container from 'react-bootstrap/Container'
@@ -8,9 +9,12 @@ import MapContainer from './components/headermap';
 import DropDown from  './components/dropdown/dropdown';
 import TableComponent from './components/table/table'
 import AmChartMap from  './components/amchart/amchart';
+import Button from 'react-bootstrap/Button';
 //Comment imports
 import NewForm from './components/NewForm.js'
 import Show from './components/Show.js'
+import UpdateModal from './components/UpdateForm'
+import Table from 'react-bootstrap/Table'
 let apiKEY = '39f4998951msh07883f04b2178e7p1b36dbjsnbf1a0ddc7ca0'
 
 // if (process.env.NODE_ENV === 'development') {
@@ -24,7 +28,10 @@ let apiKEY = '39f4998951msh07883f04b2178e7p1b36dbjsnbf1a0ddc7ca0'
 console.log(apiKEY)
 
 
-//.env BaseURL for React
+
+
+// .env BaseURL for React
+
 let baseURL = process.env.REACT_APP_BASEURL
 
 
@@ -44,10 +51,13 @@ fetch(baseURL+ '/covidstats')
    err => console.log(err))
 
 
+
 //comment component - to be moved to separate file later
 class CommentRequest extends React.Component {
 
     state = {
+      show: false,
+      setShow: false,
       requests: []
     }
   
@@ -68,8 +78,25 @@ class CommentRequest extends React.Component {
   
   //for show route
   getRequest = (request) => {
+
+    this.setState({request, getRequestActive: true, getEditRequestActive: false}) 
+
+  }
+
+    //for edit route
+    getEditRequest = (request) => {
+      this.setState({request, getRequestActive: false, getEditRequestActive: true, show: true})
+    }
+
+    
+  
+  handleClose = () => {
+    this.setState({show: false})
+  }
+
     this.setState({request})
   }
+
   
   
    // New Form HandleAdd 
@@ -83,6 +110,18 @@ class CommentRequest extends React.Component {
         location: '',
       })
     }
+
+    handleEditRequest = (data) => {
+      const newData = this.state.requests.filter( request => {
+        return request._id !== data._id
+      })
+      newData.push(data);
+      this.setState({ 
+        requests: newData,
+        show: false
+      })
+    }
+  
   
       //function to delete a request and return all the others
       deleteRequest = (id) => {
@@ -122,12 +161,19 @@ class CommentRequest extends React.Component {
           <td>{request.name}</td>
           <td>{request.comments}</td>
           <td>{request.location}</td>
-          <td className="delete"><button onClick={() => this.deleteRequest(request._id)}>Delete</button></td>
+
+          <td className="delete"><Button variant="secondary" onClick={() => this.deleteRequest(request._id)}>Delete</Button></td>
+          <td className="edit"><Button className="Edit-Button" govariant="primary" onClick={() => {this.getEditRequest(request)} }>Edit</Button></td>
           </tr>
       ))}
     </tbody>
-  </table>
-  {this.state.request ? <Show request={this.state.request}/> : null}
+  </Table>
+  {this.state.getRequestActive ? <Show request={this.state.request}/> : null}
+  <br/>
+  <br/>
+  
+  {this.state.getEditRequestActive ? <UpdateModal baseURL={baseURL}request={this.state.request} showUp={this.state.show}  hideModal={this.handleClose} handleEditRequest={this.handleEditRequest}/> : null}
+
       </div>
     );
   }
@@ -143,10 +189,13 @@ class App extends React.Component {
     flagData: [...Array(249).fill({...Object})]
   }
 
+
 //compDidmount method
 componentDidMount() {
   this.getCovidStats();
+
   this.getFlagImage();
+
 }
 
 //make fetch request to get data from api
@@ -157,11 +206,23 @@ componentDidMount() {
       'x-rapidapi-host': 'coronavirus-monitor.p.rapidapi.com',
       'x-rapidapi-key': `${apiKEY}`
 
+
      }
    }).then(data => data.json(), err => console.log(err))
      .then(parsedData => this.setState({covidData: parsedData}), err => console.log('parsedData', err))
  }
 
+
+
+    showModal = () => {
+      this.setState({ show: true });
+    };
+  
+    hideModal = () => {
+      this.setState({ show: false });
+    };
+
+    
 
  getFlagImage = () => {
   fetch('https://restcountries.eu/rest/v2/all', {
@@ -173,9 +234,10 @@ componentDidMount() {
 
 
 
-
   render() {
+
     
+
   return (
  
     <div className="App">
@@ -208,11 +270,12 @@ componentDidMount() {
             </Row>
              <Row>
               <Col>
-              {/* <CommentRequest/> */}
+              <CommentRequest/>
               
               </Col>
             </Row>
         </Container>
+
 
     </div>
   );

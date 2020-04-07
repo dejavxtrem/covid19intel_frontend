@@ -1,6 +1,6 @@
 import React from 'react'
 import '../App.css';
-
+import Form from 'react-bootstrap/Form'
 
 
 
@@ -39,14 +39,15 @@ class NewForm extends React.Component {
     
     render() {
             return (
-               <form onSubmit={this.handleSubmit}>
-                   <label htmlFor="name"></label>
+               <Form onSubmit={this.handleSubmit}>
+                 <Form.Group controlId="formBasicEmail"></Form.Group>
+                   <Form.Label>Name</Form.Label>
                    <input type="text" id="name" name="name" onChange={this.handleChange} value={this.state.name} placeholder="Name" />
                    <input type="text" id="comments" name="comments" onChange={this.handleChange} value={this.state.comments} placeholder="Comment" />
                    <input type="text" id="location" name="location" onChange={this.handleChange} value={this.state.location} placeholder="Location" />
                    <input type="submit" value="Submit"/>
 
-               </form>  
+               </Form>  
             )
         }
 }

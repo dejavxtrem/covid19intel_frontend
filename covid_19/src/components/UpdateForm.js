@@ -1,6 +1,15 @@
 import React from 'react'
+import Modal from 'react-bootstrap/Modal';
+import ModalDialog from 'react-bootstrap/ModalDialog';
+import ModalHeader from 'react-bootstrap/ModalHeader';
+import ModalTitle from 'react-bootstrap/ModalTitle';
+import ModalBody from 'react-bootstrap/ModalBody'
+import ModalFooter from 'react-bootstrap/ModalFooter';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form'
 
 class UpdateModal extends React.Component {
+
 //     state = {
 //       name: '',
 //       comments: '',
@@ -13,9 +22,9 @@ class UpdateModal extends React.Component {
       fetch(this.props.baseURL + '/covidstats/' + this.props.request._id, {
           method: 'PUT',
           body: JSON.stringify({
-              name: this.props.name,
-              comments: this.props.comments,
-              location: this.props.location
+              name: this.state.name,
+              comments: this.state.comments,
+              location: this.state.location
           }),
           headers: {
               'Content-Type': 'application/json'
@@ -26,7 +35,7 @@ class UpdateModal extends React.Component {
       .then (resJson => {
           //add the received data to state in app
           this.props.handleEditRequest(resJson)
-          this.setState({name: '', species: '', breed: ''})
+          this.setState({name: '', comments: '', location: ''})
       }).catch (error => console.error({'Error': error}))
   }
   
@@ -35,37 +44,55 @@ class UpdateModal extends React.Component {
   }
     render () {
       return (
-        <div>
-          <form onSubmit={this.handleSubmit}>
-            <div className="row">
-              <label htmlFor="name">Name</label>
-              <input
+
+        <>
+        <Modal centered="true"  show={this.props.showUp}  onHide={this.props.hideModal}>
+           
+             <ModalDialog>
+             <ModalHeader closeButton >
+                    <ModalTitle>
+                        Update your request
+                    </ModalTitle>
+                </ModalHeader>
+                <ModalBody>
+                  <Form onSubmit={this.hideModal}>
+            <Form.Row>
+              <Form.Label>Name</Form.Label>
+              <Form.Control
                 type="text"
                 id="name"
                 defaultValue={this.props.request.name}
                 onChange={this.handleChange}
               />
-              <label htmlFor="comments">Comments</label>
-              <input
+              <Form.Label>Comments</Form.Label>
+              <Form.Control
                 type="text"
                 id="comments"
                 defaultValue={this.props.request.comments}
                 onChange={this.handleChange}
               />
-              <label htmlFor="location">Location</label>
-              <input
+              <Form.Label>Location</Form.Label>
+              <Form.Control
                 type="text"
                 id="location"
                 defaultValue={this.props.request.location}
                 onChange={this.handleChange}
               />
-              <input type="submit" value="Update Request" className="button-primary" />
-              <button className="button-red"> Don't Update </button>
-            </div>
-          </form>
+              </Form.Row>
+            </Form>
+            <ModalFooter >
+              
+                    
+              <Button onClick={this.handleSubmit}>Update Request</Button>
+              <Button onClick={this.props.hideModal}>Close</Button>
+            </ModalFooter>
+            </ModalBody>
+            </ModalDialog>
+          </Modal>
           <br/><br/><br/>
-        </div>
+        </>
       )
     }
-  }
+}
+
 export default UpdateModal
