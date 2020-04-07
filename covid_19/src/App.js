@@ -146,11 +146,11 @@ class CommentRequest extends React.Component {
     <Table striped bordered hover responsive="lg" className="commenttable">
     <tbody>
         <tr>
-          <td>Name:</td> 
-          <td>Comment/request:</td>
-          <td>Location:</td>
-          <td>Delete:</td>
-          <td>Edit:</td>
+          <th>Name:</th> 
+          <th>Comment/request:</th> 
+          <th>Location:</th> 
+          <th>Delete:</th> 
+          <th>Edit:</th> 
          </tr> 
       {this.state.requests.map(request => (
          <tr key={request._id}
