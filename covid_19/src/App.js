@@ -9,6 +9,8 @@ import MapContainer from './components/headermap';
 import DropDown from  './components/dropdown/dropdown';
 import TableComponent from './components/table/table'
 import AmChartMap from  './components/amchart/amchart';
+import Carousel from 'react-bootstrap/Carousel';
+import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
 //Comment imports
 import NewForm from './components/NewForm.js'
@@ -250,7 +252,16 @@ componentDidMount() {
           {/* amchart component on col */}
             <Row>
               <Col>
-              <AmChartMap/>
+              <Carousel>
+                <Carousel.Item>
+                <AmChartMap/>
+                </Carousel.Item>
+                <Carousel.Item>
+                <img fluid  className="slider"
+              src="https://www.cdc.gov/coronavirus/2019-ncov/images/social/covid19-prevention-fb.png"
+              alt="First slide"/>
+                </Carousel.Item>
+              </Carousel>
               </Col>
             </Row>
           {/* dropdown component on col */}

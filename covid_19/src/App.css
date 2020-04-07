@@ -41,6 +41,8 @@
   padding: 1em ;
   border-radius: 10px  0 0 10px ;
   color: black;
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 900;
 
 }
 
@@ -60,6 +62,10 @@
 
 h1, th {
   font-family: 'Source Code Pro', monospace;
+}
+
+td {
+  font-family: 'Noto Serif JP', serif;
 }
 
 .comment-title {
@@ -100,4 +106,25 @@ form {
 .newform {
   display: inline;
   max-width: 30%;
+}
+
+.slider {
+  width:100%;
+  height: 500px;
+  border: 1px solid #dee2e6;
+-moz-box-shadow: 10px 10px 5px #ccc;
+-webkit-box-shadow: 10px 10px 5px #ccc;
+box-shadow: 10px 10px 5px #ccc;
+-moz-border-radius:25px;
+-webkit-border-radius:25px;
+border-radius:25px;
+margin-bottom: 30px;
+}
+
+.modalText {
+  font-family: 'Noto Serif JP', serif;
+}
+
+.titleText {
+  font-weight: 900;
 }
