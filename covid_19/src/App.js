@@ -93,10 +93,6 @@ class CommentRequest extends React.Component {
   handleClose = () => {
     this.setState({show: false})
   }
-
-    this.setState({request})
-  }
-
   
   
    // New Form HandleAdd 
@@ -141,19 +137,20 @@ class CommentRequest extends React.Component {
   
       // Comments/Requests
       <div className="commentsContainer">
-        <h1 className="comment-title">Post any comments or requests in your area</h1>
+       
         <NewForm baseURL={baseURL}
     handleAddRequest={this.handleAddRequest}/>
   
     {/* this is where the requests will display */}
-    <br/>
-    
-    <table>
+
+    <Table striped bordered hover responsive="lg" className="commenttable">
     <tbody>
         <tr>
           <td>Name:</td> 
           <td>Comment/request:</td>
           <td>Location:</td>
+          <td>Delete:</td>
+          <td>Edit:</td>
          </tr> 
       {this.state.requests.map(request => (
          <tr key={request._id}

@@ -5,6 +5,7 @@
 
 .App {
   text-align: center;
+ /* background-color: #0f4c75; */
 }
 
 .App-logo {
@@ -62,14 +63,16 @@
   font-weight: bold;
 }
 
-
-
 .commenttable {
   max-width: 75%;
 }
 
 .title {
   font-size: 4rem;
+}
+
+h1 {
+  font-family: 'Source Code Pro', monospace;
 }
 
 .comment-title {
@@ -90,4 +93,10 @@ form {
   -webkit-border-radius:25px; */
   /* border-radius: 25px; */
   margin-bottom: 10px;
+  background-color: white;
+}
+
+.newform {
+  display: inline;
+  max-width: 30%;
 }
