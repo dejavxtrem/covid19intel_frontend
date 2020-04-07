@@ -17,7 +17,7 @@ import NewForm from './components/NewForm.js'
 import Show from './components/Show.js'
 import UpdateModal from './components/UpdateForm'
 import Table from 'react-bootstrap/Table'
-let apiKEY = '39f4998951msh07883f04b2178e7p1b36dbjsnbf1a0ddc7ca0'
+let apiKEY = process.env.REACT_APP_GOOGLE_API_KEY
 
 // if (process.env.NODE_ENV === 'development') {
 //   baseURL = 'http://localhost:3003'
@@ -40,7 +40,7 @@ let baseURL = process.env.REACT_APP_BASEURL
 if (process.env.NODE_ENV === 'development') {
   baseURL = 'http://localhost:9000'
 } else {
-  baseURL = 'https://fathomless-sierra-68956.herokuapp.com'
+  baseURL = process.env.REACT_APP_BASEURL
 }
 
 console.log('current base URL:', baseURL)
