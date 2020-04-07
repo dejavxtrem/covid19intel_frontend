@@ -11,10 +11,7 @@ import AmChartMap from  './components/amchart/amchart';
 //Comment imports
 import NewForm from './components/NewForm.js'
 import Show from './components/Show.js'
-import UpdateModal from './components/UpdateForm'
-import Table from 'react-bootstrap/Table'
 let apiKEY = '39f4998951msh07883f04b2178e7p1b36dbjsnbf1a0ddc7ca0'
-
 
 // if (process.env.NODE_ENV === 'development') {
 //   baseURL = 'http://localhost:3003'
@@ -27,7 +24,7 @@ let apiKEY = '39f4998951msh07883f04b2178e7p1b36dbjsnbf1a0ddc7ca0'
 console.log(apiKEY)
 
 
-// .env BaseURL for React
+//.env BaseURL for React
 let baseURL = process.env.REACT_APP_BASEURL
 
 
@@ -71,13 +68,8 @@ class CommentRequest extends React.Component {
   
   //for show route
   getRequest = (request) => {
-    this.setState({request, getRequestActive: true, getEditRequestActive: false}) 
+    this.setState({request})
   }
-
-    //for edit route
-    getEditRequest = (request) => {
-      this.setState({request, getRequestActive: false, getEditRequestActive: true})
-    }
   
   
    // New Form HandleAdd 
@@ -90,10 +82,6 @@ class CommentRequest extends React.Component {
         comments: '',
         location: '',
       })
-    }
-
-    handleEditRequest = (request) => {
-      console.log(request)
     }
   
       //function to delete a request and return all the others
@@ -109,7 +97,7 @@ class CommentRequest extends React.Component {
       }
   
     render() {
-      
+      console.log(this.state.requests)
     return (
   
       // Comments/Requests
@@ -121,31 +109,25 @@ class CommentRequest extends React.Component {
     {/* this is where the requests will display */}
     <br/>
     
-    <Table striped bordered hover responsive="lg" className="commenttable">
+    <table>
     <tbody>
-        <tr className="commentheaders">
+        <tr>
           <td>Name:</td> 
           <td>Comment/request:</td>
           <td>Location:</td>
-          <td>Delete Comment:</td>
-          <td>Edit Comment:</td>
          </tr> 
       {this.state.requests.map(request => (
-         <tr key={request._id}>
+         <tr key={request._id}
+         onMouseOver={() => this.getRequest(request)}>
           <td>{request.name}</td>
-          <td onMouseOver={() => this.getRequest(request)}>{request.comments}</td>
+          <td>{request.comments}</td>
           <td>{request.location}</td>
           <td className="delete"><button onClick={() => this.deleteRequest(request._id)}>Delete</button></td>
-          <td className="edit"><button onClick={() => {this.getEditRequest(request)} }>Edit</button></td>
           </tr>
       ))}
     </tbody>
-  </Table>
-  {this.state.getRequestActive ? <Show request={this.state.request}/> : null}
-  <br/>
-  <br/>
-  
-  {this.state.getEditRequestActive ? <UpdateModal baseURL={baseURL}request={this.state.request} handleEditRequest={this.handleEditRequest}/>: null}
+  </table>
+  {this.state.request ? <Show request={this.state.request}/> : null}
       </div>
     );
   }
@@ -157,12 +139,14 @@ class App extends React.Component {
 
   state = {
     //create a placeholder for 208 array of objects
-    covidData: {countries_stat:[...Array(208).fill({...Object})]}
+    covidData: {countries_stat:[...Array(208).fill({...Object})]},
+    flagData: [...Array(249).fill({...Object})]
   }
 
 //compDidmount method
 componentDidMount() {
   this.getCovidStats();
+  this.getFlagImage();
 }
 
 //make fetch request to get data from api
@@ -177,6 +161,18 @@ componentDidMount() {
    }).then(data => data.json(), err => console.log(err))
      .then(parsedData => this.setState({covidData: parsedData}), err => console.log('parsedData', err))
  }
+
+
+ getFlagImage = () => {
+  fetch('https://restcountries.eu/rest/v2/all', {
+    "method": "GET"
+  }).then(data => data.json(), err => console.log(err))
+    .then(parsedData => this.setState({flagData: parsedData}), err => console.log('parsedData', err))
+
+ }
+
+
+
 
   render() {
     
@@ -201,7 +197,7 @@ componentDidMount() {
           {/* dropdown component on col */}
             <Row>
               <Col>
-              <DropDown covidData={this.state.covidData}/>
+              <DropDown covidData={this.state.covidData}  covidFlag={this.state.flagData}/>
               </Col>
             </Row>
           {/* table component on col */}
@@ -212,7 +208,7 @@ componentDidMount() {
             </Row>
              <Row>
               <Col>
-              <CommentRequest/>
+              {/* <CommentRequest/> */}
               
               </Col>
             </Row>

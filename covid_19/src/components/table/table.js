@@ -23,8 +23,8 @@ class TableComponent extends React.Component {
             <tr>
                         <th>Country</th>
                         <th>Total Cases</th>
-                        <th># of deaths</th>
-                        <th># recovered</th>
+                        <th># of Deaths</th>
+                        <th># Recovered</th>
             </tr>   
             </thead>
                 <tbody>
