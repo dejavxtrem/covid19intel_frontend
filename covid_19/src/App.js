@@ -8,6 +8,9 @@ import MapContainer from './components/headermap';
 import DropDown from  './components/dropdown/dropdown';
 import TableComponent from './components/table/table'
 import AmChartMap from  './components/amchart/amchart';
+import Carousel from 'react-bootstrap/Carousel';
+
+
 //Comment imports
 import NewForm from './components/NewForm.js'
 import Show from './components/Show.js'
@@ -191,7 +194,14 @@ componentDidMount() {
           {/* amchart component on col */}
             <Row>
               <Col>
-              <AmChartMap/>
+              <Carousel>
+                <Carousel.Item>
+                <AmChartMap/>
+                </Carousel.Item>
+                <Carousel.Item>
+                <AmChartMap/>
+                </Carousel.Item>
+              </Carousel>
               </Col>
             </Row>
           {/* dropdown component on col */}
@@ -208,7 +218,7 @@ componentDidMount() {
             </Row>
              <Row>
               <Col>
-              {/* <CommentRequest/> */}
+              <CommentRequest/>
               
               </Col>
             </Row>
