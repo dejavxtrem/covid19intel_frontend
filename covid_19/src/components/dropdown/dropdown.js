@@ -13,20 +13,27 @@ import Button from 'react-bootstrap/Button';
 
 
 
-
-
-
-
-
-
-
-
-
 class DropDown extends React.Component {
 
  state = {
    show: false,
-   setShow: false
+   setShow: false,
+   countryPicked: {
+       active_cases: '',
+       case: '',
+       country_name: '',
+       deaths: '',
+       new_cases: '',
+       new_deaths: '',
+       region: '',
+       serious_critical: '',
+       total_cases_per_1m_population: '',
+       total_recovered: ''
+   },
+   flagImg: '',
+   population: '',
+   Region: '',
+   Capital: ''
  }
  
   handleShow = () => {
@@ -41,8 +48,16 @@ handleClose = () => {
 finderCountry = (valueFinder) => {
   this.props.covidData.countries_stat.some(countryFind => {
      if (countryFind.country_name === valueFinder) {
-        console.log(countryFind)
+        this.setState({countryPicked: countryFind})
      }
+  })
+  this.props.covidFlag.some(flagFinder => {
+      if (flagFinder.name === valueFinder) {
+        this.setState({flagImg: flagFinder.flag})
+        this.setState({population:flagFinder.population })
+        this.setState({Region: flagFinder.region})
+        this.setState({Capital: flagFinder.capital})
+      }
   })
 }
   
@@ -60,7 +75,10 @@ finderCountry = (valueFinder) => {
   }
 
     
-
+//function to get flag for modal pop up
+// getFlagImage = () => {
+    
+// }
 
     render () {
   
@@ -72,8 +90,8 @@ finderCountry = (valueFinder) => {
               <Col className="coldrop">
                
               <ReactFlagsSelect  className="menu-flags" onSelect={this.onSelectFlag}/>
-              <Button className="gobutton" govariant="primary" onClick={this.handleShow}>GO</Button>
-              <CountryModal showUp={this.state.show}  hideModal={this.handleClose}/>
+              <Button variant="primary" onClick={this.handleShow}>GO</Button>
+              <CountryModal showUp={this.state.show}  hideModal={this.handleClose} countryPick={this.state.countryPicked} flagDisplay={this.state.flagImg} flagPopulation={this.state.population} flagRegion={this.state.Region} flagCapital={this.state.Capital}/>
               </Col>
             </Row>
           </Container>
