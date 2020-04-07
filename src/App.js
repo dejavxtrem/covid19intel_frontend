@@ -40,7 +40,7 @@ let baseURL = process.env.REACT_APP_BASEURL
 if (process.env.NODE_ENV === 'development') {
   baseURL = 'http://localhost:9000'
 } else {
-  baseURL = 'https://covid19intel-backend.herokuapp.com'
+  baseURL = process.env.REACT_APP_BASEURL
 }
 
 console.log('current base URL:', baseURL)

@@ -24,4 +24,8 @@ Set up comments functionality for add/edit/show/delete, and put in the map at th
 * As a user, I can see the carousel rotate automatically or shift it manually between the world map and the CDC guidelines image.
 * I can select a country from a dropdown and click GO button to view stats for that country
 * I can view a table of the 10 countries with the highest number of cases
+<<<<<<< HEAD
 * I can add, edit, view and delete comments/requests
+=======
+* I can add, edit, view and delete comments/requests
+>>>>>>> 2274676de89b78c96f44b0d0bb2ee665fb86b984
