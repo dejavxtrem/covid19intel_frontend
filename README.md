@@ -9,8 +9,7 @@ Trello: https://trello.com/b/on6A3NQs/covid-intel
 
 
 # Heroku link: 
-
-https://covid19intel-backend.herokuapp.com
+http://covid19intel-frontend.herokuapp.com/
 
 # Purpose: 
 Tracking COVID-19 information by country and users can leave messages in public forum regarding the pandemic, or make comments/requests
